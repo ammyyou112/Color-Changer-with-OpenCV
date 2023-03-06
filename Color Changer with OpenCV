@@ -1,0 +1,18 @@
+import cv2
+import numpy as np
+from PIL import Image
+
+img = cv2.imread('image3.png')
+
+
+hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+lower_red = np.array([0, 50, 50])
+upper_red = np.array([10, 255, 255])
+
+mask = cv2.inRange(hsv_img, lower_red, upper_red)
+
+img[mask == 255] = [0, 0, 0]
+
+display(Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)))
+
